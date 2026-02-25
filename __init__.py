@@ -9,6 +9,7 @@ PROJECT_META = {
     'category': 'Unsupervised Clustering',
     'nav_group': 'Machine Learning',
     'tags': ['k-means++', 'clustering', 'rfm analysis'],
+    'screenshot': 'customer_segmentation.png',
 }
 
 bp = Blueprint(
