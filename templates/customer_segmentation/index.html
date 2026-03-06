@@ -4,7 +4,72 @@
 
 {% block head_extra %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-<style>.back-link:hover { color: #00d4ff; }</style>
+<style>
+.back-link:hover { color: #00d4ff; }
+
+/* Column dividers between control groups */
+.page-customer-segmentation .controls-grid .control-group {
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--border);
+}
+.page-customer-segmentation .controls-grid .control-group:last-child {
+    padding-right: 0;
+    border-right: none;
+}
+
+/* Options column: stretch children (e.g. button) to full width */
+.page-customer-segmentation .options-col {
+    align-items: stretch;
+}
+.page-customer-segmentation .btn-regenerate {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Toggle switches */
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text);
+    user-select: none;
+}
+.toggle-row input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+.toggle-track {
+    width: 36px;
+    height: 20px;
+    background: var(--border);
+    border-radius: 10px;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+}
+.toggle-row input:checked ~ .toggle-track {
+    background: var(--primary);
+}
+.toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.toggle-row input:checked ~ .toggle-track .toggle-thumb {
+    transform: translateX(16px);
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -50,16 +115,6 @@
     <!-- Controls -->
     <div class="controls-grid">
         <div class="control-group">
-            <label class="control-label">Clusters (K)</label>
-            <input type="range" id="kSlider" min="2" max="8" value="4">
-            <div class="k-display">
-                <span class="k-bound">2</span>
-                <span class="k-val" id="kValue">4</span>
-                <span class="k-bound">8</span>
-            </div>
-        </div>
-
-        <div class="control-group">
             <label class="control-label">
                 Feature Space
                 <span class="info-tip">
@@ -75,17 +130,31 @@
         </div>
 
         <div class="control-group">
+            <label class="control-label">Clusters (K)</label>
+            <input type="range" id="kSlider" min="2" max="8" value="4">
+            <div class="k-display">
+                <span class="k-bound">2</span>
+                <span class="k-val" id="kValue">4</span>
+                <span class="k-bound">8</span>
+            </div>
+        </div>
+
+        <div class="control-group">
             <label class="control-label">Options</label>
             <div class="options-col">
-                <label class="option-row">
-                    <input type="checkbox" id="chkKMeansPP" checked>
-                    <span>Use K-means++ Initialization</span>
-                </label>
-                <label class="option-row">
-                    <input type="checkbox" id="chkCentroids" checked>
-                    <span>Show Centroids</span>
-                </label>
-                <button class="btn-regenerate" id="btnRegenerate">Regenerate Data</button>
+                <div>
+                    <label class="toggle-row">
+                        <input type="checkbox" id="chkKMeansPP" checked>
+                        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                        <span>Use K-means++ Initialization</span>
+                    </label>
+                    <label class="toggle-row" style="margin-top:0.75rem">
+                        <input type="checkbox" id="chkCentroids" checked>
+                        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                        <span>Show Centroids</span>
+                    </label>
+                </div>
+                <button class="btn-regenerate metric-btn" id="btnRegenerate">Regenerate Data</button>
             </div>
         </div>
     </div>

@@ -687,9 +687,9 @@
         performClustering();
     });
 
-    document.querySelectorAll('.metric-btn').forEach(function (btn) {
+    document.querySelectorAll('.metric-btns .metric-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
-            document.querySelectorAll('.metric-btn').forEach(function (b) { b.classList.remove('active'); });
+            document.querySelectorAll('.metric-btns .metric-btn').forEach(function (b) { b.classList.remove('active'); });
             btn.classList.add('active');
             activeMetric = btn.getAttribute('data-metric');
             performClustering();
