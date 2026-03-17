@@ -5,7 +5,16 @@
 {% block head_extra %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <style>
-.back-link:hover { color: #00d4ff; }
+/* ── Project accent tokens ────────────────────────────────────── */
+:root {
+    --project-accent:        #3b82f6;
+    --project-accent-text:   #93c5fd;
+    --project-accent-bg:     rgba(59, 130, 246, 0.08);
+    --project-accent-active: rgba(59, 130, 246, 0.15);
+    --project-accent-rim:    rgba(59, 130, 246, 0.25);
+}
+
+.back-link:hover { color: var(--project-accent-text); }
 
 /* Column dividers between control groups */
 .page-customer-segmentation .controls-grid .control-group {
@@ -174,7 +183,7 @@
                 <span class="step-indicator">Step: <span id="stepCurrent">1</span> / <span id="stepTotal">1</span></span>
             </div>
             <div class="chart-wrap">
-                <canvas id="scatterChart"></canvas>
+                <canvas id="scatterChart" role="img" aria-label="Animated scatter plot showing customer clusters as K-means clustering converges"></canvas>
             </div>
 
             <!-- Animation controls -->
@@ -200,7 +209,7 @@
                 </span>
             </div>
             <div class="chart-wrap-sm">
-                <canvas id="convergenceChart"></canvas>
+                <canvas id="convergenceChart" role="img" aria-label="Line chart showing inertia decrease across K-means iterations as centroids converge"></canvas>
             </div>
 
             <div class="side-section-title pink">
@@ -211,7 +220,7 @@
                 </span>
             </div>
             <div class="chart-wrap-sm">
-                <canvas id="elbowChart"></canvas>
+                <canvas id="elbowChart" role="img" aria-label="Elbow method chart showing inertia by number of clusters K, with silhouette scores, to identify the optimal cluster count"></canvas>
             </div>
         </div>
     </div>
